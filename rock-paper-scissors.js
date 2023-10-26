@@ -1,23 +1,25 @@
-function getRandomInt(max) {
+// Used to randomize the computer choice
+function getRandomIndex(max) {
   return Math.floor(Math.random() * max);
 }
 
 function getComputerChoice() {
   const computerChoices = ["rock", "paper", "scissors"];
-  let index = getRandomInt(3);
+  let index = getRandomIndex(3);
   let computerChoice = computerChoices[index];
   return computerChoice;
 }
 
-function formatSelection(selection) {
+// Fomats selection for printing to console
+function formatSelectionCapitalCase(selection) {
   formattedSelection =
     selection.charAt(0).toUpperCase() + selection.substr(1).toLowerCase();
   return formattedSelection;
 }
 
 function playRound(playerSelection, computerSelection) {
-  playerSelectionFormatted = formatSelection(playerSelection);
-  computerSelectionFormatted = formatSelection(computerSelection);
+  playerSelectionFormatted = formatSelectionCapitalCase(playerSelection);
+  computerSelectionFormatted = formatSelectionCapitalCase(computerSelection);
   lossStatement = `You lose! ${computerSelectionFormatted} beats ${playerSelectionFormatted}`;
   winStatement = `You Win! ${playerSelectionFormatted} beats ${computerSelectionFormatted}`;
 
@@ -51,10 +53,20 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-playerScore = 0;
-computerScore = 0;
+function getWinner(playerScore, computerScore) {
+  if (playerScore > computerScore) {
+    console.log("You Win!");
+  } else if (computerScore > playerScore) {
+    console.log("You Lose");
+  } else {
+    console.log("It's a draw.");
+  }
+}
 
-function game() {
+function playGame() {
+  playerScore = 0;
+  computerScore = 0;
+
   for (let i = 0; i < 5; i++) {
     playerChoice = prompt("Rock, Paper or Scissors?").toLowerCase();
     computerChoice = getComputerChoice();
@@ -71,13 +83,7 @@ function game() {
     );
   }
 
-  if (playerScore > computerScore) {
-    console.log("You Win!");
-  } else if (computerScore > playerScore) {
-    console.log("You Lose");
-  } else {
-    console.log("It's a draw.");
-  }
+  getWinner(playerScore, computerScore);
 }
 
-game();
+playGame();
