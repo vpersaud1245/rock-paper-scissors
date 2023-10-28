@@ -23,31 +23,33 @@ function playRound(playerSelection, computerSelection) {
   lossStatement = `You lose! ${computerSelectionFormatted} beats ${playerSelectionFormatted}`;
   winStatement = `You Win! ${playerSelectionFormatted} beats ${computerSelectionFormatted}`;
 
+  const resultDisplay = document.querySelector(".displayResults");
+
   if (computerSelection == playerSelection) {
-    console.log("It's a Draw!");
+    resultDisplay.textContent = "It's a Draw!";
     return "Draw";
   } else if (playerSelection == "rock") {
     if (computerSelection == "paper") {
-      console.log(lossStatement);
+      resultDisplay.textContent = lossStatement;
       return "Loss";
     } else if (computerSelection == "scissors") {
-      console.log(winStatement);
+      resultDisplay.textContent = winStatement;
       return "Win";
     }
   } else if (playerSelection == "scissors") {
     if (computerSelection == "rock") {
-      console.log(lossStatement);
+      resultDisplay.textContent = lossStatement;
       return "Loss";
     } else if (computerSelection == "paper") {
-      console.log(winStatement);
+      resultDisplay.textContent = winStatement;
       return "Win";
     }
   } else if (playerSelection == "paper") {
     if (computerSelection == "scissors") {
-      console.log(lossStatement);
+      resultDisplay.textContent = lossStatement;
       return "Loss";
     } else if (computerSelection == "rock") {
-      console.log(winStatement);
+      resultDisplay.textContent = winStatement;
       return "Win";
     }
   }
