@@ -85,5 +85,3 @@ function playGame() {
 
   getWinner(playerScore, computerScore);
 }
-
-playGame();
