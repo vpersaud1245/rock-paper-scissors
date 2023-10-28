@@ -85,3 +85,11 @@ function playGame() {
 
   getWinner(playerScore, computerScore);
 }
+
+const playerChoiceBtns = document.querySelectorAll("button");
+
+for (let button of playerChoiceBtns) {
+  button.addEventListener("click", (e) => {
+    playRound(e.target.id, getComputerChoice());
+  });
+}
