@@ -18,12 +18,13 @@ function formatSelectionCapitalCase(selection) {
 }
 
 function playRound(playerSelection, computerSelection) {
-  playerSelectionFormatted = formatSelectionCapitalCase(playerSelection);
-  computerSelectionFormatted = formatSelectionCapitalCase(computerSelection);
-  lossStatement = `You lose! ${computerSelectionFormatted} beats ${playerSelectionFormatted}`;
-  winStatement = `You Win! ${playerSelectionFormatted} beats ${computerSelectionFormatted}`;
+  const playerSelectionFormatted = formatSelectionCapitalCase(playerSelection);
+  const computerSelectionFormatted =
+    formatSelectionCapitalCase(computerSelection);
+  const lossStatement = `You lose! ${computerSelectionFormatted} beats ${playerSelectionFormatted}`;
+  const winStatement = `You Win! ${playerSelectionFormatted} beats ${computerSelectionFormatted}`;
 
-  const resultDisplay = document.querySelector(".displayResults");
+  const resultDisplay = document.querySelector(".displayRoundResults");
 
   if (computerSelection == playerSelection) {
     resultDisplay.textContent = "It's a Draw!";
@@ -55,43 +56,41 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-function getWinner(playerScore, computerScore) {
-  if (playerScore > computerScore) {
-    console.log("You Win!");
-  } else if (computerScore > playerScore) {
-    console.log("You Lose");
-  } else {
-    console.log("It's a draw.");
-  }
-}
-
-function playGame() {
+function resetScore() {
   playerScore = 0;
   computerScore = 0;
+}
 
-  for (let i = 0; i < 5; i++) {
-    playerChoice = prompt("Rock, Paper or Scissors?").toLowerCase();
-    computerChoice = getComputerChoice();
-    roundResult = playRound(playerChoice, computerChoice);
-
-    if (roundResult == "Win") {
-      playerScore += 1;
-    } else if (roundResult == "Loss") {
-      computerScore += 1;
-    }
-
-    console.log(
-      `Player Score: ${playerScore} Computer Score: ${computerScore}`
-    );
+function checkForWinner(playerScore, computerScore) {
+  if (playerScore == 5) {
+    winDisplay.textContent = "You win!";
+    resetScore();
+  } else if (computerScore == 5) {
+    winDisplay.textContent = "You Lose";
+    resetScore();
   }
-
-  getWinner(playerScore, computerScore);
+  scoreDisplay.textContent = `Player Score: ${playerScore} Computer Score: ${computerScore}`;
 }
 
 const playerChoiceBtns = document.querySelectorAll("button");
+const scoreDisplay = document.querySelector(".displayScore");
+const winDisplay = document.querySelector(".displayWin");
 
+let playerScore = 0;
+let computerScore = 0;
+
+// When player selects a choice a round will be played and the results displayed
 for (let button of playerChoiceBtns) {
   button.addEventListener("click", (e) => {
-    playRound(e.target.id, getComputerChoice());
+    winDisplay.textContent = "";
+    let result = playRound(e.target.id, getComputerChoice());
+    if (result == "Win") {
+      playerScore += 1;
+    } else if (result == "Loss") {
+      computerScore += 1;
+    }
+    scoreDisplay.textContent = `Player Score: ${playerScore} Computer Score: ${computerScore}`;
+
+    checkForWinner(playerScore, computerScore);
   });
 }
