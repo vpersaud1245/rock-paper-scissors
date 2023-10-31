@@ -61,6 +61,11 @@ function resetScore() {
   computerScore = 0;
 }
 
+function updateScoreDisplay() {
+  playerScoreDisplay.textContent = playerScore;
+  computerScoreDisplay.textContent = computerScore;
+}
+
 function checkForWinner(playerScore, computerScore) {
   if (playerScore == 5) {
     winDisplay.textContent = "You win!";
@@ -69,11 +74,20 @@ function checkForWinner(playerScore, computerScore) {
     winDisplay.textContent = "You Lose";
     resetScore();
   }
-  scoreDisplay.textContent = `Player Score: ${playerScore} Computer Score: ${computerScore}`;
+  updateScoreDisplay();
+}
+
+function updateScore(result) {
+  if (result == "Win") {
+    playerScore += 1;
+  } else if (result == "Loss") {
+    computerScore += 1;
+  }
 }
 
 const playerChoiceBtns = document.querySelectorAll("button");
-const scoreDisplay = document.querySelector(".displayScore");
+const playerScoreDisplay = document.querySelector(".playerScore");
+const computerScoreDisplay = document.querySelector(".computerScore");
 const winDisplay = document.querySelector(".displayWin");
 
 let playerScore = 0;
@@ -84,12 +98,9 @@ for (let button of playerChoiceBtns) {
   button.addEventListener("click", (e) => {
     winDisplay.textContent = "";
     let result = playRound(e.target.id, getComputerChoice());
-    if (result == "Win") {
-      playerScore += 1;
-    } else if (result == "Loss") {
-      computerScore += 1;
-    }
-    scoreDisplay.textContent = `Player Score: ${playerScore} Computer Score: ${computerScore}`;
+
+    updateScore(result);
+    updateScoreDisplay();
 
     checkForWinner(playerScore, computerScore);
   });
