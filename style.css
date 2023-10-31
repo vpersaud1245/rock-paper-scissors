@@ -3,6 +3,11 @@ body {
   color: white;
 }
 
+img {
+  height: 200px;
+  width: 200px;
+}
+
 h1,
 h2,
 h3 {
@@ -12,6 +17,7 @@ h3 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-evenly;
 }
 .gameboard {
   display: flex;
@@ -36,4 +42,15 @@ p {
 
 button {
   margin: 5px 10px;
+}
+
+.displayWin,
+.displayRoundResults {
+  margin: 25px 25px;
+}
+
+input {
+  height: 200px;
+  width: 200px;
+  margin: 10px;
 }

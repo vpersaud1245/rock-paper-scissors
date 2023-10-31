@@ -96,6 +96,21 @@ let computerScore = 0;
 // When player selects a choice a round will be played and the results displayed
 for (let button of playerChoiceBtns) {
   button.addEventListener("click", (e) => {
+    console.log("Button Pressed");
+    winDisplay.textContent = "";
+    let result = playRound(e.target.id, getComputerChoice());
+
+    updateScore(result);
+    updateScoreDisplay();
+
+    checkForWinner(playerScore, computerScore);
+  });
+}
+
+const playerInputs = document.querySelectorAll("input");
+for (let input of playerInputs) {
+  input.addEventListener("click", (e) => {
+    console.log("Button Pressed");
     winDisplay.textContent = "";
     let result = playRound(e.target.id, getComputerChoice());
 
